@@ -1,0 +1,273 @@
+---
+title: "¿Y ahora qué?"
+subtitle: "CUNEF - Business Analytics"
+author: "Leonardo Hansa"
+format: 
+  revealjs:
+    echo: true
+---
+
+## Continuarás
+
+1. R
+2. Python
+3. Estudio poco ortodoxo
+
+## Cómo tratarás datos en R
+
+**dplyr** será tu herramienta principal: 
+
+- `across()`
+- `*_join()`
+
+## `BUSCARV()` de Excel
+
+**dplyr** te proporciona _joins_ a lo bases de datos. Mucho más que un `BUSCARV()`
+
+```{r}
+#| label: libs
+#| include: false
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+```{r}
+#| label: new-dfs
+#| echo: false
+df1 <- tibble(
+  x = c("a", "b", "a", "b"), 
+  y = c(6, 9, 1, 5)
+)
+
+df2 <- tibble(
+  x = c("a", "b"), 
+  col1 = c("X", "Y"), 
+  col2 = c(67, 54)
+)
+```
+
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+```{r}
+#| label: df1
+#| echo: false
+df1
+```
+
+
+:::
+
+::: {.column width="60%"}
+```{r}
+#| label: df2
+#| echo: false
+df2
+```
+:::
+
+::::
+
+## `BUSCARV()` de Excel
+
+```{r}
+#| label: join
+df1 |> 
+  left_join(df2, by = "x")
+```
+
+## Uno para todos
+
+Con `across()` reutilizas código en tus tablas. 
+
+
+```{r}
+#| label: across
+iris |> 
+  summarise(across(
+    starts_with("Sepal"), 
+    list(media = mean, mediana = median)
+  ))
+```
+
+## El compañero de dplyr
+
+**tidyr** es el compañero ideal. 
+
+- `pivot_*()`
+- `separate()`
+- `complete()`
+- `expand_grid()`
+
+## Un ejemplo de tabla dinámica
+
+Formato ancho: una fila es un **individuo.**
+
+```{r}
+#| label: pivot1
+#| echo: false
+tidyr::table1
+```
+
+## Un ejemplo de tabla dinámica
+
+Formato largo: una fila es una **observación.**
+
+```{r}
+#| label: pivot2
+#| echo: true
+tidyr::table1 |> 
+  pivot_longer(-c(country, year))
+```
+
+## Un ejemplo de tabla dinámica
+
+```{r}
+#| label: pivot3
+#| echo: true
+tidyr::table1 |> 
+  pivot_longer(-c(country, year)) |> 
+  pivot_wider(
+    names_from = name, 
+    values_from = value
+  )
+```
+
+## Más tidyverse
+
+- **stringr** para cualquier operación con textos
+- **dplyr** como interfaz: de bases de datos ó de spark.
+- **ggplot2**
+
+## Visualiza datos
+
+- [**ggplot2**](https://ggplot2.tidyverse.org/)
+- [**shiny**](https://shiny.rstudio.com/)
+    + [**flexdashboard**](https://pkgs.rstudio.com/flexdashboard/)
+    
+    
+## ¿Trabajas con Excel?
+
+- **readxl** para leer
+- **writexl** para escribir
+- **XLConnect**, **tidyxl** ó **openxlsx** para cosas más avanzadas.
+
+## Y con Python, ¿qué hago?
+
+## Y con Python, ¿qué hago?
+
+### Haz **pandas**
+
+## pandas para tablas dinámicas
+
+- De ancho a largo: `df.melt()`
+    + [Documentación](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.melt.html)
+- De largo a ancho: `df.pivot()`
+    + [Documentación](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.pivot.html)
+
+
+## pandas para _joins_ y `BUSCARV()`
+
+```{python}
+#| label: pandas-merge
+#| eval: false
+df1.merge(
+  df2, 
+  on='columna_comun', 
+  how='left'
+)
+```
+
+[Documentación](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.merge.html)
+
+## ¿pandas para pintar? Sí, también
+
+- `df.plot()`
+
+[Ejemplo](https://www.dataquest.io/blog/plot-dataframe-pandas/)
+
+## Aunque para pintar te recomiendo seaborn
+
+No matplotlib... [seaborn](https://seaborn.pydata.org/)
+
+## Que te suene esto
+
+No creo que programes en **numpy** pero es importante que sepas que [existe.](https://numpy.org/)
+
+## Sobre internet
+
+- Para _web scraping_ con R, **rvest.**
+- Para _web scraping_ con Python: 
+    + **beatifulsoup**
+    + **selenium** (también en R)
+    
+## Ahora, estudio poco ortodoxo
+
+- Twitter, Linkedin, Tiktok y YouTube
+- Blogs y agregadores
+- Eventos
+
+## Twitter, Linkedin, TikTok y YouTube (1)
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- [Giles McMullen](https://www.youtube.com/@gilesmcmullen)
+- [Juanlu Cano](https://astrojuanlu.substack.com/)
+- [Matt Dancho](https://www.linkedin.com/in/mattdancho/)
+- [Jesús López](https://www.linkedin.com/in/jsulopzs/)
+- [Hadley Wickham](https://twitter.com/hadleywickham)
+
+:::
+
+::: {.column width="50%"}
+
+
+- [Carlos Gil](https://twitter.com/gilbellosta)
+- [The Femrise](https://www.tiktok.com/@thefemrise)
+- [Albert Rappa](https://twitter.com/rappa753)
+- [Pelayo Arbués](https://twitter.com/pelayoarbues)
+- [Javier Álvarez Liébana](https://twitter.com/DadosdeLaplace)
+
+:::
+
+::::
+
+
+## Twitter, Linkedin, TikTok y YouTube (2)
+
+- [Posit (RStudio)](https://twitter.com/posit_glimpse)
+- [PyLadies](https://twitter.com/pyladies)
+- [PyData](https://twitter.com/PyData)
+- [R Hispano](https://twitter.com/R_Hisp)
+- [R Ladies](https://twitter.com/RLadiesGlobal)
+
+## Portales
+
+- [RealPython](https://realpython.com/)
+- [RPubs](https://rpubs.com/)
+- [Muestrear no es pecado](https://muestrear-no-es-pecado.netlify.app/)
+- [Fronkonstin](https://fronkonstin.com/)
+- [RBloggers](https://www.r-bloggers.com/)
+- [Análisis y decisión](https://analisisydecision.es/)
+- [El arte del dato bien contado](https://elartedeldato.com/blog/)
+
+## Eventos
+
+- [Meetup R Madrid](https://www.meetup.com/grupo-de-usuarios-de-r-de-madrid/)
+- [R Ladies Madrid](https://www.meetup.com/rladies-madrid/)
+- [PyData Madrid](https://www.meetup.com/PyData-Madrid/)
+- [Congreso R Hispano](http://r-es.org/jornadas/)
+- [PyconES](https://2022.es.pycon.org/)
+
+
+---------
+::: {.r-fit-text style="color: #800080; padding-top: 200px;"}
+[leonardohansa.com](https://leonardohansa.com/)
+:::
+
+

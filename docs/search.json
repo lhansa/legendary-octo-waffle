@@ -1,0 +1,177 @@
+[
+  {
+    "objectID": "index.html#continuarás",
+    "href": "index.html#continuarás",
+    "title": "¿Y ahora qué?",
+    "section": "Continuarás",
+    "text": "Continuarás\n\nR\nPython\nEstudio poco ortodoxo"
+  },
+  {
+    "objectID": "index.html#cómo-tratarás-datos-en-r",
+    "href": "index.html#cómo-tratarás-datos-en-r",
+    "title": "¿Y ahora qué?",
+    "section": "Cómo tratarás datos en R",
+    "text": "Cómo tratarás datos en R\ndplyr será tu herramienta principal:\n\nacross()\n*_join()"
+  },
+  {
+    "objectID": "index.html#buscarv-de-excel",
+    "href": "index.html#buscarv-de-excel",
+    "title": "¿Y ahora qué?",
+    "section": "BUSCARV() de Excel",
+    "text": "BUSCARV() de Excel\ndplyr te proporciona joins a lo bases de datos. Mucho más que un BUSCARV()\n\n\n\n\n\n\n\n# A tibble: 4 × 2\n  x         y\n  <chr> <dbl>\n1 a         6\n2 b         9\n3 a         1\n4 b         5\n\n\n\n\n\n# A tibble: 2 × 3\n  x     col1   col2\n  <chr> <chr> <dbl>\n1 a     X        67\n2 b     Y        54"
+  },
+  {
+    "objectID": "index.html#buscarv-de-excel-1",
+    "href": "index.html#buscarv-de-excel-1",
+    "title": "¿Y ahora qué?",
+    "section": "BUSCARV() de Excel",
+    "text": "BUSCARV() de Excel\n\ndf1 |> \n  left_join(df2, by = \"x\")\n\n# A tibble: 4 × 4\n  x         y col1   col2\n  <chr> <dbl> <chr> <dbl>\n1 a         6 X        67\n2 b         9 Y        54\n3 a         1 X        67\n4 b         5 Y        54"
+  },
+  {
+    "objectID": "index.html#uno-para-todos",
+    "href": "index.html#uno-para-todos",
+    "title": "¿Y ahora qué?",
+    "section": "Uno para todos",
+    "text": "Uno para todos\nCon across() reutilizas código en tus tablas.\n\niris |> \n  summarise(across(\n    starts_with(\"Sepal\"), \n    list(media = mean, mediana = median)\n  ))\n\n  Sepal.Length_media Sepal.Length_mediana Sepal.Width_media Sepal.Width_mediana\n1           5.843333                  5.8          3.057333                   3"
+  },
+  {
+    "objectID": "index.html#el-compañero-de-dplyr",
+    "href": "index.html#el-compañero-de-dplyr",
+    "title": "¿Y ahora qué?",
+    "section": "El compañero de dplyr",
+    "text": "El compañero de dplyr\ntidyr es el compañero ideal.\n\npivot_*()\nseparate()\ncomplete()\nexpand_grid()"
+  },
+  {
+    "objectID": "index.html#un-ejemplo-de-tabla-dinámica",
+    "href": "index.html#un-ejemplo-de-tabla-dinámica",
+    "title": "¿Y ahora qué?",
+    "section": "Un ejemplo de tabla dinámica",
+    "text": "Un ejemplo de tabla dinámica\nFormato ancho: una fila es un individuo.\n\n\n# A tibble: 6 × 4\n  country      year  cases population\n  <chr>       <int>  <int>      <int>\n1 Afghanistan  1999    745   19987071\n2 Afghanistan  2000   2666   20595360\n3 Brazil       1999  37737  172006362\n4 Brazil       2000  80488  174504898\n5 China        1999 212258 1272915272\n6 China        2000 213766 1280428583"
+  },
+  {
+    "objectID": "index.html#un-ejemplo-de-tabla-dinámica-1",
+    "href": "index.html#un-ejemplo-de-tabla-dinámica-1",
+    "title": "¿Y ahora qué?",
+    "section": "Un ejemplo de tabla dinámica",
+    "text": "Un ejemplo de tabla dinámica\nFormato largo: una fila es una observación.\n\ntidyr::table1 |> \n  pivot_longer(-c(country, year))\n\n# A tibble: 12 × 4\n   country      year name            value\n   <chr>       <int> <chr>           <int>\n 1 Afghanistan  1999 cases             745\n 2 Afghanistan  1999 population   19987071\n 3 Afghanistan  2000 cases            2666\n 4 Afghanistan  2000 population   20595360\n 5 Brazil       1999 cases           37737\n 6 Brazil       1999 population  172006362\n 7 Brazil       2000 cases           80488\n 8 Brazil       2000 population  174504898\n 9 China        1999 cases          212258\n10 China        1999 population 1272915272\n11 China        2000 cases          213766\n12 China        2000 population 1280428583"
+  },
+  {
+    "objectID": "index.html#un-ejemplo-de-tabla-dinámica-2",
+    "href": "index.html#un-ejemplo-de-tabla-dinámica-2",
+    "title": "¿Y ahora qué?",
+    "section": "Un ejemplo de tabla dinámica",
+    "text": "Un ejemplo de tabla dinámica\n\ntidyr::table1 |> \n  pivot_longer(-c(country, year)) |> \n  pivot_wider(\n    names_from = name, \n    values_from = value\n  )\n\n# A tibble: 6 × 4\n  country      year  cases population\n  <chr>       <int>  <int>      <int>\n1 Afghanistan  1999    745   19987071\n2 Afghanistan  2000   2666   20595360\n3 Brazil       1999  37737  172006362\n4 Brazil       2000  80488  174504898\n5 China        1999 212258 1272915272\n6 China        2000 213766 1280428583"
+  },
+  {
+    "objectID": "index.html#más-tidyverse",
+    "href": "index.html#más-tidyverse",
+    "title": "¿Y ahora qué?",
+    "section": "Más tidyverse",
+    "text": "Más tidyverse\n\nstringr para cualquier operación con textos\ndplyr como interfaz: de bases de datos ó de spark.\nggplot2"
+  },
+  {
+    "objectID": "index.html#visualiza-datos",
+    "href": "index.html#visualiza-datos",
+    "title": "¿Y ahora qué?",
+    "section": "Visualiza datos",
+    "text": "Visualiza datos\n\nggplot2\nshiny\n\nflexdashboard"
+  },
+  {
+    "objectID": "index.html#trabajas-con-excel",
+    "href": "index.html#trabajas-con-excel",
+    "title": "¿Y ahora qué?",
+    "section": "¿Trabajas con Excel?",
+    "text": "¿Trabajas con Excel?\n\nreadxl para leer\nwritexl para escribir\nXLConnect, tidyxl ó openxlsx para cosas más avanzadas."
+  },
+  {
+    "objectID": "index.html#y-con-python-qué-hago",
+    "href": "index.html#y-con-python-qué-hago",
+    "title": "¿Y ahora qué?",
+    "section": "Y con Python, ¿qué hago?",
+    "text": "Y con Python, ¿qué hago?"
+  },
+  {
+    "objectID": "index.html#y-con-python-qué-hago-1",
+    "href": "index.html#y-con-python-qué-hago-1",
+    "title": "¿Y ahora qué?",
+    "section": "Y con Python, ¿qué hago?",
+    "text": "Y con Python, ¿qué hago?\nHaz pandas"
+  },
+  {
+    "objectID": "index.html#pandas-para-tablas-dinámicas",
+    "href": "index.html#pandas-para-tablas-dinámicas",
+    "title": "¿Y ahora qué?",
+    "section": "pandas para tablas dinámicas",
+    "text": "pandas para tablas dinámicas\n\nDe ancho a largo: df.melt()\n\nDocumentación\n\nDe largo a ancho: df.pivot()\n\nDocumentación"
+  },
+  {
+    "objectID": "index.html#pandas-para-joins-y-buscarv",
+    "href": "index.html#pandas-para-joins-y-buscarv",
+    "title": "¿Y ahora qué?",
+    "section": "pandas para joins y BUSCARV()",
+    "text": "pandas para joins y BUSCARV()\n\ndf1.merge(\n  df2, \n  on='columna_comun', \n  how='left'\n)\n\nDocumentación"
+  },
+  {
+    "objectID": "index.html#pandas-para-pintar-sí-también",
+    "href": "index.html#pandas-para-pintar-sí-también",
+    "title": "¿Y ahora qué?",
+    "section": "¿pandas para pintar? Sí, también",
+    "text": "¿pandas para pintar? Sí, también\n\ndf.plot()\n\nEjemplo"
+  },
+  {
+    "objectID": "index.html#aunque-para-pintar-te-recomiendo-seaborn",
+    "href": "index.html#aunque-para-pintar-te-recomiendo-seaborn",
+    "title": "¿Y ahora qué?",
+    "section": "Aunque para pintar te recomiendo seaborn",
+    "text": "Aunque para pintar te recomiendo seaborn\nNo matplotlib… seaborn"
+  },
+  {
+    "objectID": "index.html#que-te-suene-esto",
+    "href": "index.html#que-te-suene-esto",
+    "title": "¿Y ahora qué?",
+    "section": "Que te suene esto",
+    "text": "Que te suene esto\nNo creo que programes en numpy pero es importante que sepas que existe."
+  },
+  {
+    "objectID": "index.html#sobre-internet",
+    "href": "index.html#sobre-internet",
+    "title": "¿Y ahora qué?",
+    "section": "Sobre internet",
+    "text": "Sobre internet\n\nPara web scraping con R, rvest.\nPara web scraping con Python:\n\nbeatifulsoup\nselenium (también en R)"
+  },
+  {
+    "objectID": "index.html#ahora-estudio-poco-ortodoxo",
+    "href": "index.html#ahora-estudio-poco-ortodoxo",
+    "title": "¿Y ahora qué?",
+    "section": "Ahora, estudio poco ortodoxo",
+    "text": "Ahora, estudio poco ortodoxo\n\nTwitter, Linkedin, Tiktok y YouTube\nBlogs y agregadores\nEventos"
+  },
+  {
+    "objectID": "index.html#twitter-linkedin-tiktok-y-youtube-1",
+    "href": "index.html#twitter-linkedin-tiktok-y-youtube-1",
+    "title": "¿Y ahora qué?",
+    "section": "Twitter, Linkedin, TikTok y YouTube (1)",
+    "text": "Twitter, Linkedin, TikTok y YouTube (1)\n\n\n\nGiles McMullen\nJuanlu Cano\nMatt Dancho\nJesús López\nHadley Wickham\n\n\n\nCarlos Gil\nThe Femrise\nAlbert Rappa\nPelayo Arbués\nJavier Álvarez Liébana"
+  },
+  {
+    "objectID": "index.html#twitter-linkedin-tiktok-y-youtube-2",
+    "href": "index.html#twitter-linkedin-tiktok-y-youtube-2",
+    "title": "¿Y ahora qué?",
+    "section": "Twitter, Linkedin, TikTok y YouTube (2)",
+    "text": "Twitter, Linkedin, TikTok y YouTube (2)\n\nPosit (RStudio)\nPyLadies\nPyData\nR Hispano\nR Ladies"
+  },
+  {
+    "objectID": "index.html#portales",
+    "href": "index.html#portales",
+    "title": "¿Y ahora qué?",
+    "section": "Portales",
+    "text": "Portales\n\nRealPython\nRPubs\nMuestrear no es pecado\nFronkonstin\nRBloggers\nAnálisis y decisión\nEl arte del dato bien contado"
+  },
+  {
+    "objectID": "index.html#eventos",
+    "href": "index.html#eventos",
+    "title": "¿Y ahora qué?",
+    "section": "Eventos",
+    "text": "Eventos\n\nMeetup R Madrid\nR Ladies Madrid\nPyData Madrid\nCongreso R Hispano\nPyconES"
+  }
+]
