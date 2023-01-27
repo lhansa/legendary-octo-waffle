@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "next-steps"
+  title: "¿Y ahora qué?"
   navbar:
     left:
       - href: index.qmd
